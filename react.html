@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>React CRUD</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .item { background: #eee; margin: 5px 0; padding: 10px; display: flex; justify-content: space-between; }
+        button { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function App() {
+            
+            const [items, setItems] = useState([
+                { id: 1, text: 'Tanulni a vizsgára' },
+                { id: 2, text: 'Megírni a házit' }
+            ]);
+            const [input, setInput] = useState('');
+
+            const add = () => {
+                if (input) {
+                    setItems([...items, { id: Date.now(), text: input }]);
+                    setInput('');
+                }
+            };
+
+            const remove = (id) => setItems(items.filter(item => item.id !== id));
+
+            return (
+                <div>
+                    <h1>React CRUD</h1>
+                    <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Új elem..." />
+                    <button onClick={add}>Hozzáadás</button>
+                    <div>
+                        {items.map(item => (
+                            <div key={item.id} className="item">
+                                {item.text}
+                                <button onClick={() => remove(item.id)}>Törlés</button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+    <h2><a href="index.html" >Vissza a Főoldalra</a></h2>
+</body>
+</html>

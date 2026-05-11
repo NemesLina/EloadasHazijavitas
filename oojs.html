@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>OOJS Grafika</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .box { position: absolute; border: 2px solid black; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header><h1>Objektumorientált JS Grafika</h1></header>
+    <nav><button onclick="createNewShape()">Új alakzat létrehozása</button></nav>
+    
+    <script>
+        // Alaposztály
+        class Shape {
+            constructor(color) {
+                this.color = color;
+                this.element = document.createElement('div');
+            }
+            render() {
+                this.element.className = 'box';
+                this.element.style.backgroundColor = this.color;
+                this.element.style.width = '100px';
+                this.element.style.height = '100px';
+                this.element.style.top = Math.random() * 300 + 200 + 'px';
+                this.element.style.left = Math.random() * 800 + 'px';
+                document.body.appendChild(this.element);
+            }
+        }
+
+        // Öröklődés (extends)
+        class Textbox extends Shape {
+            constructor(color, text) {
+                super(color); // Szülő konstruktor hívása
+                this.text = text;
+            }
+            render() {
+                super.render(); // Alap render hívása
+                this.element.innerText = this.text;
+                this.element.style.borderRadius = '50%'; // Kör alakú
+            }
+        }
+
+        function createNewShape() {
+            const colors = ['#ffadad', '#ffd6a5', '#fdffb6', '#caffbf'];
+            const randomColor = colors[Math.floor(Math.random()*colors.length)];
+            const myBox = new Textbox(randomColor, "OOJS");
+            myBox.render();
+        }
+    </script>
+</body>
+</html>

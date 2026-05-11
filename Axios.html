@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Axios CRUD</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .user { border-bottom: 1px solid #ccc; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function AxiosApp() {
+            const [users, setUsers] = useState([]);
+            const API_URL = 'https://jsonplaceholder.typicode.com/users';
+
+            // READ - Adatok lekérése a szerverről
+            useEffect(() => {
+                axios.get(API_URL).then(res => setUsers(res.data));
+            }, []);
+
+            // CREATE - Új elem "küldése" a szerverre
+            const addUser = () => {
+                const newUser = { name: "Új Felhasználó" };
+                axios.post(API_URL, newUser).then(res => {
+                    setUsers([res.data, ...users]);
+                });
+            };
+
+            // DELETE - Törlés a szerverről
+            const deleteUser = (id) => {
+                axios.delete(`${API_URL}/${id}`).then(() => {
+                    setUsers(users.filter(u => u.id !== id));
+                });
+            };
+
+            return (
+                <div>
+                    <h1>React + Axios CRUD (Szerver oldali szimuláció)</h1>
+                    <button onClick={addUser} style={{padding: '10px', background: 'green', color: 'white'}}>Új felhasználó hozzáadása</button>
+                    <div>
+                        {users.map(u => (
+                            <div key={u.id} className="user">
+                                <strong>{u.name}</strong> 
+                                <button onClick={() => deleteUser(u.id)} style={{marginLeft: '10px'}}>Törlés</button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<AxiosApp />);
+    </script>
+    <h2><a href="index.html">Vissza a Főoldalra</a></h2>
+</body>
+</html>

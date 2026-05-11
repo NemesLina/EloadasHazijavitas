@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>JS CRUD - Feladatkezelő</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>JavaScript CRUD (Helyi tömb)</h1></header>
+    <nav><a href="index.html">Vissza a főoldalra</a></nav>
+    <main>
+        <div style="display:flex; gap:10px;">
+            <input type="text" id="taskInput" placeholder="Új feladat...">
+            <button onclick="addItem()">Hozzáadás</button>
+        </div>
+        <div id="listContainer"></div>
+    </main>
+
+    <script>
+        let tasks = [
+            { id: 1, text: "Környezet beállítása" },
+            { id: 2, text: "HTML váz elkészítése" }
+        ];
+
+        function render() {
+            const container = document.getElementById('listContainer');
+            container.innerHTML = tasks.map(t => `
+                <div class="item">
+                    <span>${t.text}</span>
+                    <button class="delete" onclick="deleteItem(${t.id})">Törlés</button>
+                </div>
+            `).join('');
+        }
+
+        function addItem() {
+            const input = document.getElementById('taskInput');
+            if (input.value.trim()) {
+                tasks.push({ id: Date.now(), text: input.value });
+                input.value = '';
+                render();
+            }
+        }
+
+        function deleteItem(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            render();
+        }
+
+        render();
+    </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+:root {
+    --primary-color: #2b193b;    
+    --secondary-color: #2c365e;  
+    --accent-color: #c5979D;     
+    --bg-color: #2b193b;         
+    --text-color: #4b8f8c;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Fejléc */
+header {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #334155 100%);
+    color: var(--white);
+    padding: 2.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    letter-spacing: -1px;
+}
+
+/* Navigáció */
+nav {
+    background-color: var(--white);
+    padding: 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 15px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Tartalmi rész */
+main {
+    flex: 1;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.9);
+}
+
+/* CRUD és Form elemek */
+input[type="text"] {
+    padding: 10px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    width: 60%;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    margin-left: 5px;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+button.delete {
+    background-color: #ef4444; /* Piros a törléshez */
+}
+
+/* Lista elemek stílusa */
+.item, .user {
+    background: #f1f5f9;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid var(--primary-color);
+}
+
+/* Lábléc */
+footer {
+    background-color: var(--secondary-color);
+    color: #94a3b8;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+}
+
+footer b, footer strong {
+    color: var(--white);
+}
+
+/* Reszponzivitás mobilra */
+@media (max-width: 600px) {
+    main { margin: 1rem; padding: 1rem; }
+    nav a { display: block; margin: 10px 0; }
+    input[type="text"] { width: 100%; margin-bottom: 10px; }
+}
+h2{
+    text-align: center;
+}
